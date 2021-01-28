@@ -1,3 +1,4 @@
 # Eng2JpEng
-Convert English text into "Japanese English" Text
-PS- Code is absoulte ass
+I little thingie I made Convert English text into "Japanese English" Text for S;G LBP
+Ex. Hello, world -> Ｈｅｌｌｏ， ｗｏｒｌｄ
+# Code is absoulte ass, so I wouldn't recommend that you use this. 
