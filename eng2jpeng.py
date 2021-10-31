@@ -1,94 +1,45 @@
+import os
 
-txt = input("Enter path of file:  ")
+eng = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!?.()“”:,+/*'-%~＆♪"
+jp_eng = "０１２３４５６７８９ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ！？．（）“”：，＋／＊’―％～＆♪"
+save_path = './converted'
+dir = os.path.join("converted")
 
-okboomer = open(txt, mode ='r+', encoding='utf-8')
-
-
-line = okboomer.read()
-line = line.replace("A", "Ａ")
-line = line.replace("B", "Ｂ")
-line = line.replace("C", "Ｃ")
-line = line.replace("D", "Ｄ")
-line = line.replace("E", "Ｅ")
-line = line.replace("F", "Ｆ")
-line = line.replace("G", "Ｇ")
-line = line.replace("H", "Ｈ")
-line = line.replace("I", "Ｉ")
-line = line.replace("J", "Ｊ")
-line = line.replace("K", "Ｋ")
-line = line.replace("L", "Ｌ")
-line = line.replace("M", "Ｍ")
-line = line.replace("N", "Ｎ")
-line = line.replace("O", "Ｏ")
-line = line.replace("P", "Ｐ")
-line = line.replace("Q", "Ｑ")
-line = line.replace("R", "Ｒ")
-line = line.replace("S", "Ｓ")
-line = line.replace("T", "Ｔ")
-line = line.replace("U", "Ｕ")
-line = line.replace("V", "Ｖ")
-line = line.replace("W", "Ｗ")
-line = line.replace("X", "Ｘ")
-line = line.replace("Y", "Ｙ")
-line = line.replace("Z", "Ｚ")
-line = line.replace("a", "ａ")
-line = line.replace("b", "ｂ")
-line = line.replace("c", "ｃ")
-line = line.replace("d", "ｄ")
-line = line.replace("e", "ｅ")
-line = line.replace("f", "ｆ")
-line = line.replace("g", "ｇ")
-line = line.replace("h", "ｈ")
-line = line.replace("i", "ｉ")
-line = line.replace("j", "ｊ")
-line = line.replace("k", "ｋ")
-line = line.replace("l", "ｌ")
-line = line.replace("m", "ｍ")
-line = line.replace("n", "ｎ")
-line = line.replace("o", "ｏ")
-line = line.replace("p", "ｐ")
-line = line.replace("q", "ｑ")
-line = line.replace("r", "ｒ")
-line = line.replace("s", "ｓ")
-line = line.replace("t", "ｔ")
-line = line.replace("u", "ｕ")
-line = line.replace("v", "ｖ")
-line = line.replace("w", "ｗ")
-line = line.replace("x", "ｘ")
-line = line.replace("y", "ｙ")
-line = line.replace("z", "ｚ")
-line = line.replace("0", "０")
-line = line.replace("1", "１")
-line = line.replace("2", "２")
-line = line.replace("3", "３")
-line = line.replace("4", "４")
-line = line.replace("5", "５")
-line = line.replace("6", "６")
-line = line.replace("7", "７")
-line = line.replace("8", "８")
-line = line.replace("9", "９")
-line = line.replace("!", "！")
-line = line.replace("?", "？")
-line = line.replace(".", "．")
-line = line.replace("(", "（")
-line = line.replace(")", "）")
-line = line.replace("“", "“")
-line = line.replace("”", "”")
-line = line.replace(":", "：")
-line = line.replace(",", "，")
-line = line.replace("+", "＋")
-line = line.replace("/", "／")
-line = line.replace("*", "＊")
-line = line.replace("'", "’")
-line = line.replace("-", "―")
-line = line.replace("%", "％")
-line = line.replace("~", "～")
-line = line.replace("＆", "＆")
-line = line.replace("♪", "♪")
-okboomer.seek(0)
-okboomer.truncate(0)
-okboomer.write(line)
-okboomer.close()
+if not os.path.exists(dir):
+    os.mkdir(dir)
 
 
 
+
+def convert(filename):
+    switch = True
+    completeName = os.path.join(save_path, filename)
+    openFile = open(filename, 'r+', encoding='utf-8')
+    data = openFile.read()
+    jp_str = ""
+    for en_char in data:
+        if en_char == "[":
+            switch = False
+            jp_char = en_char
+        elif en_char == "]":
+            switch = True
+            jp_char = en_char
+        else:
+            if not switch:
+                jp_char = en_char
+            else:
+                try:
+                    index = eng.index(en_char)
+                    jp_char = jp_eng[index]
+                except ValueError:
+                    jp_char = en_char
+
+        jp_str += jp_char
+    openFile.close()
+    createFile = open(completeName, 'w', encoding = "utf-8")
+    createFile.write(jp_str)
+    createFile.close()
+
+for filename in os.listdir():
+        if filename.endswith('.txt'):
+            convert(filename)
