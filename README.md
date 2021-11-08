@@ -10,4 +10,5 @@ Hello, world[%p] -> Ｈｅｌｌｏ， ｗｏｒｌｄ [%p]
 
 ## Usage
 Just run eng2jpeng.py in the folder where all of your txt files are and the converted txt files will be in the newly made "converted" folder
+
 Text doesn't show up properly when [] and everything inside is converted into Japanese English but if you for some reason want it to be converted use [this](https://github.com/HoodedTissue/Eng2JpEng/blob/main/Extra/engTWOjpeng.py)
